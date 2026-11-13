@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<style type="text/css">
+.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.sng {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.def {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Once Datos | Unidad de Datos y Visualización · Once Noticias</title>
+  <link rel="icon" type="image/png" href="logo_once_noticias.png">
+  <meta name="description" content="Portal de periodismo de datos, visualizaciones interactivas y monitores especiales de Once Noticias.">
+  <style>
+    :root {
+      --guinda: #8B0032;
+      --guinda-oscuro: #5e0021;
+      --dorado: #D4AF37;
+      --gris-fondo: #f6f7f9;
+      --texto: #1e293b;
+      --texto-secundario: #64748b;
+      --blanco: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--gris-fondo);
+      color: var(--texto);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Cintillo Superior Institucional */
+    header.cintillo-once {
+      background-color: var(--guinda);
+      color: var(--blanco);
+      border-bottom: 4px solid var(--dorado);
+      padding: 12px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .marca-contenedor {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .cintillo-logo {
+      height: 36px;       
+      width: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    .cintillo-marca {
+      font-weight: 800;
+      font-size: 1.35rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .cintillo-sub {
+      font-size: 0.92rem;
+      opacity: 0.9;
+      border-left: 1px solid rgba(255, 255, 255, 0.35);
+      padding-left: 14px;
+    }
+
+    /* Hero / Encabezado Principal */
+    .hero {
+      background: linear-gradient(135deg, var(--guinda-oscuro) 0%, var(--guinda) 100%);
+      color: var(--blanco);
+      padding: 64px 24px;
+      text-align: center;
+    }
+
+    .hero-contenido {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 14px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      opacity: 0.92;
+      max-width: 660px;
+      margin: 0 auto;
+    }
+
+    /* Contenedor de Proyectos */
+    main.contenedor {
+      max-width: 1140px;
+      width: 100%;
+      margin: -36px auto 60px;
+      padding: 0 24px;
+      flex: 1;
+    }
+
+    .seccion-titulo {
+      background: var(--blanco);
+      display: inline-block;
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--guinda);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      margin-bottom: 22px;
+    }
+
+    .grid-proyectos {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      gap: 26px;
+    }
+
+    /* Tarjetas de Proyecto */
+    .tarjeta {
+      background: var(--blanco);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+      border: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .tarjeta:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(139, 0, 50, 0.12);
+      border-color: var(--dorado);
+    }
+
+    .tarjeta-banner {
+      height: 150px;
+      background: linear-gradient(120deg, #1f77b4 0%, #8B0032 50%, #d62728 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 20px;
+      color: var(--blanco);
+    }
+
+    .tarjeta-banner.proximamente {
+      background: linear-gradient(120deg, #334155 0%, #475569 100%);
+    }
+
+    .etiqueta-estado {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(0, 0, 0, 0.65);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .etiqueta-estado.activo {
+      background: #16a34a;
+    }
+
+    .banner-icono {
+      font-size: 2.8rem;
+      text-align: center;
+    }
+
+    .tarjeta-cuerpo {
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tarjeta-fecha {
+      font-size: 0.8rem;
+      color: var(--texto-secundario);
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .tarjeta-titulo {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--texto);
+    }
+
+    .tarjeta-desc {
+      font-size: 0.95rem;
+      color: var(--texto-secundario);
+      margin-bottom: 20px;
+      flex: 1;
+    }
+
+    .tarjeta-boton {
+      display: inline-flex;
+      align-items: center;
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--guinda);
+      gap: 6px;
+    }
+
+    .tarjeta:hover .tarjeta-boton {
+      text-decoration: underline;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #94a3b8;
+      text-align: center;
+      padding: 28px 20px;
+      font-size: 0.88rem;
+      border-top: 3px solid var(--dorado);
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.85rem; }
+      .cintillo-sub { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cintillo Institucional -->
+<header class="cintillo-once">
+    <div class="marca-contenedor">
+      <img src="logo_once_noticias.png" alt="Logo Once Noticias" class="cintillo-logo">
+      <span class="cintillo-marca">Once Noticias</span>
+      <span class="cintillo-sub">Once Datos · Periodismo de Datos y Visualización</span>
+    </div>
+  </header>
+
+  <!-- Encabezado Principal -->
+  <section class="hero">
+    <div class="hero-contenido">
+      <h1>Once Datos</h1>
+      <p>Plataforma de análisis, mapas interactivos y coberturas especiales de datos de Once Noticias.</p>
+    </div>
+  </section>
+
+  <!-- Catálogo de Proyectos -->
+  <main class="contenedor">
+    <div class="seccion-titulo">Proyectos e Interactivos</div>
+
+    <div class="grid-proyectos">
+
+      <!-- PROYECTO 1: Tablero Electoral EE. UU. 2026 -->
+      <a href="https://elecciones.oncedatos.com" class="tarjeta">
+        <div class="tarjeta-banner">
+          <span class="etiqueta-estado activo">Publicado</span>
+          <div class="banner-icono">🗳️🇺🇸</div>
+        </div>
+        <div class="tarjeta-cuerpo">
+          <div class="tarjeta-fecha">Noviembre 2026 · Internacional</div>
+          <h2 class="tarjeta-titulo">Monitor Electoral EE. UU. 2026</h2>
+          <p class="tarjeta-desc">
+            Resultados y composición del Senado (100 curules), Cámara de Representantes (435 distritos) y las 36 elecciones a Gobernador.
+          </p>
+          <span class="tarjeta-boton">Abrir tablero interactivo &rarr;</span>
+        </div>
+      </a>
+
+      <!-- PROYECTO 2: Plantilla para tu próximo proyecto -->
+      <div class="tarjeta" style="opacity: 0.88; cursor: default;">
+        <div class="tarjeta-banner proximamente">
+          <span class="etiqueta-estado">Próximamente</span>
+          <div class="banner-icono">📊🇲🇽</div>
+        </div>
+        <div class="tarjeta-cuerpo">
+          <div class="tarjeta-fecha">En desarrollo · Nacional</div>
+          <h2 class="tarjeta-titulo">Indicadores y Especiales de Datos</h2>
+          <p class="tarjeta-desc">
+            Nuevas visualizaciones interactivas, seguimiento legislativo y radiografías de datos públicos en México.
+          </p>
+          <span class="tarjeta-boton" style="color: #64748b;">En preparación</span>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <strong>Once Noticias · Once Datos</strong> &mdash; Unidad de Datos y Visualización Interactiva
+  </footer>
+
+</body>
+</html>
